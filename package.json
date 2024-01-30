@@ -1,0 +1,23 @@
+{
+  "name": "node.js-things-",
+  "version": "1.0.0",
+  "description": "Learning Node.jjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raftaarrashedin/Node.js-Things-.git"
+  },
+  "keywords": [
+    "raftaar",
+    "rashedin"
+  ],
+  "author": "raftaar rashedin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raftaarrashedin/Node.js-Things-/issues"
+  },
+  "homepage": "https://github.com/raftaarrashedin/Node.js-Things-#readme"
+}
