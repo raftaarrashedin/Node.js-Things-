@@ -19,7 +19,7 @@ node create_server.js
 npm init
 ```
 
-# first commit and push
+# First commit and push
 ```git add . && git commit -m " server file added & git initialized & package.json file successfully created" && git push origin main
 ```
 
