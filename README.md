@@ -50,3 +50,49 @@ node index.js
 nodemon index.js
 git add . && git commit -m "Nodemon installed and perfectly running without refreshing the browser" && git push origin main
 ```
+
+mkdir backend
+cd backend
+subl .
+type nul > index.js
+npm install express
+nodemon index.js
+type nul > model.js
+mkdir model
+cd model
+dir
+type nul > login.js
+npm install mongoose
+cd..
+mkdir route
+cd route
+type nul > login.js
+cd..
+nodemon index.js
+code .
+type nul > db.js
+nodemon index.js
+code .
+nodemon index.js
+cd model
+type nul > signin.js
+cd..
+git add . && git status && git commit -m "mongodb database connection successful & login schema defined && git push origin main
+git add . && git status && git commit -m "mongodb database connection successful & login schema defined " && git push origin main
+dir
+cd backend
+dir
+cd route
+dir
+type nul > signin.js
+cd..
+nodemon index.js
+cd..
+git add .
+git commit -m  "Signup operation run"
+git push origin main
+mkdir frontend
+cd frontenf
+cd frontend
+cls
+doskey/history
