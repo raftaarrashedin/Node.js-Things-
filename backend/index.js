@@ -13,9 +13,9 @@ app.get('/',(req,res) => {
 
 
 app.use(express());
-// app.use('/api',require('../route/user_login'))
-app.use('/api',require('./route/login'))
 
+app.use('/api',require('./route/login'))
+app.use('/api',require('./route/signup'))
 
 
 app.listen(port)
