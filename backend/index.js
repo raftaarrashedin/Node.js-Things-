@@ -14,8 +14,11 @@ app.get('/',(req,res) => {
 
 app.use(express());
 
+
+
+
 app.use('/api',require('./route/login'))
 app.use('/api',require('./route/signup'))
-
+app.use('/api', require('./route/fetch'))
 
 app.listen(port)
