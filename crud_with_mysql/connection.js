@@ -6,3 +6,5 @@ const conn = mysql.createConnection({
 	password : "",
 	database : "node"
 });
+
+module.exports = conn;
