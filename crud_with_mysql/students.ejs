@@ -17,7 +17,8 @@
       <th>Roll No</th>
       <th>Subject</th>
       <th>Marks</th>
-      <th>Actions</th>
+      <th>Action-Delete</th>
+      <th>Action-Update</th>
 
     </tr>
 
@@ -33,7 +34,7 @@
             <td><%- students[i].subject %></td>
             <td><%- students[i].marks %></td>
             <td><button><a href="/student_delete?id=<%- students[i].id %>">Delete</a></button></td>
-            <td><button><a href="/student_update?id=<%- students[i].id %>">Update</a></button></td>
+            <td><button><a href="/update_student?id=<%- students[i].id %>">Update</a></button></td>
 
           </tr>
       <% } %>
@@ -55,3 +56,4 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+

@@ -54,4 +54,252 @@ app.get('/student_delete',(req,res) => {
 })
 
 
+app.post('/student_update',(req,res) => {
+	conn.connect((error) => {
+		if(error) console.log(error);
+
+		const name = req.query.name;
+		const rollno = req.query.rollno;
+		const subject = req.query.subject;
+		const marks = req.query.marks;
+		const sql = "Update student set name = '"+name+"', rollno = '"+rollno+"', subject = '"+subject+"', marks = '"+marks+"' where id = ?";
+
+		const id = req.query.id;
+		conn.query(sql,[id], (error,result) => {
+			if(error) console.log(error);
+
+			res.redirect('/students') 
+
+		})
+	})
+})
+
 app.listen(5000)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Information List</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <h1>Student Information List</h1>
+
+  <table border="1" width="100%">
+    <tr>
+      <th>S.no.</th>
+      <th>Name</th>
+      <th>Roll No</th>
+      <th>Subject</th>
+      <th>Marks</th>
+      <th>Action-Delete</th>
+      <th>Action-Update</th>
+
+    </tr>
+
+    <% if(students.length > 0) { %>
+
+      <% for(var i = 0; i< students.length;i++){ %>
+
+          <tr>
+            
+            <td><%- students[i].id %></td>
+            <td><%- students[i].name %></td>
+            <td><%- students[i].rollno %></td>
+            <td><%- students[i].subject %></td>
+            <td><%- students[i].marks %></td>
+            <td><button><a href="/student_delete?id=<%- students[i].id %>">Delete</a></button></td>
+            <td><button><a href="/student_update?id=<%- students[i].id %>">Update</a></button></td>
+
+          </tr>
+      <% } %>
+
+    <% } else { %>
+      <h1>Students data not found!</h1>
+    <% } %>
+
+
+
+
+  </table>
+
+
+
+  <!-- Bootstrap JS (Optional, if you need to use JS components) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Information List</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <h1>Student Information List</h1>
+
+  <table border="1" width="100%">
+    <tr>
+      <th>S.no.</th>
+      <th>Name</th>
+      <th>Roll No</th>
+      <th>Subject</th>
+      <th>Marks</th>
+      <th>Actions</th>
+    </tr>
+
+    <% if(students.length > 0) { %>
+
+      <% for(var i = 0; i < students.length; i++){ %>
+
+          <tr>
+            
+            <td><%- students[i].id %></td>
+            <td><%- students[i].name %></td>
+            <td><%- students[i].rollno %></td>
+            <td><%- students[i].subject %></td>
+            <td><%- students[i].marks %></td>
+            <td>
+              <form action="/student_update" method="POST">
+                <input type="hidden" name="id" value="<%- students[i].id %>">
+                <input type="text" name="name" value="<%- students[i].name %>">
+                <input type="text" name="rollno" value="<%- students[i].rollno %>">
+                <input type="text" name="subject" value="<%- students[i].subject %>">
+                <input type="text" name="marks" value="<%- students[i].marks %>">
+                <button type="submit">Update</button>
+              </form>
+            </td>
+
+          </tr>
+      <% } %>
+
+    <% } else { %>
+      <h1>Students data not found!</h1>
+    <% } %>
+
+  </table>
+
+  <!-- Bootstrap JS (Optional, if you need to use JS components) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+-------------------------------------------------------
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Information List</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .edit-form {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Student Information List</h1>
+
+  <table border="1" width="100%">
+    <tr>
+      <th>S.no.</th>
+      <th>Name</th>
+      <th>Roll No</th>
+      <th>Subject</th>
+      <th>Marks</th>
+      <th>Actions</th>
+    </tr>
+
+    <% if(students.length > 0) { %>
+
+      <% for(var i = 0; i < students.length; i++){ %>
+
+          <tr>
+            
+            <td><%- students[i].id %></td>
+            <td><%- students[i].name %></td>
+            <td><%- students[i].rollno %></td>
+            <td><%- students[i].subject %></td>
+            <td><%- students[i].marks %></td>
+            <td>
+              <form action="/student_update" method="POST" class="update-form">
+                <input type="hidden" name="id" value="<%- students[i].id %>">
+                <input type="text" name="name" value="<%- students[i].name %>">
+                <input type="text" name="rollno" value="<%- students[i].rollno %>">
+                <input type="text" name="subject" value="<%- students[i].subject %>">
+                <input type="text" name="marks" value="<%- students[i].marks %>">
+                <button type="submit">Update</button>
+              </form>
+              <form action="/student_delete" method="GET">
+                <input type="hidden" name="id" value="<%- students[i].id %>">
+                <button type="submit">Delete</button>
+              </form>
+              <button class="edit-btn">Edit</button>
+              <form class="edit-form">
+                <input type="text" name="name" value="<%- students[i].name %>">
+                <input type="text" name="rollno" value="<%- students[i].rollno %>">
+                <input type="text" name="subject" value="<%- students[i].subject %>">
+                <input type="text" name="marks" value="<%- students[i].marks %>">
+                <button type="button" class="cancel-btn">Cancel</button>
+                <button type="button" class="save-btn">Save</button>
+              </form>
+            </td>
+
+          </tr>
+      <% } %>
+
+    <% } else { %>
+      <h1>Students data not found!</h1>
+    <% } %>
+
+  </table>
+
+  <!-- Bootstrap JS (Optional, if you need to use JS components) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.edit-btn').click(function() {
+        $(this).siblings('.edit-form').toggle();
+      });
+
+      $('.cancel-btn').click(function() {
+        $(this).parent('.edit-form').hide();
+      });
+    });
+  </script>
+</body>
+</html>
+---------------------------------------
+app.post('/student_update', (req, res) => {
+    const { id, name, rollno, subject, marks } = req.body;
+
+    const sql = "UPDATE students SET name = ?, rollno = ?, subject = ?, marks = ? WHERE id = ?";
+
+    conn.query(sql, [name, rollno, subject, marks, id], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        res.redirect('/students');
+    });
+});

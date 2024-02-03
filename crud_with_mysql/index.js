@@ -9,14 +9,14 @@ app.use(bodyParser.urlencoded({extended : true}));
 
 app.set('view engine','ejs')
 
-// Establishing the MySQL connection
-conn.connect((error) => {
-    if (error) {
-        console.error('Error connecting to MySQL database: ' + error.stack);
-        return;
-    }
-    console.log('Connected to MySQL database as id ' + conn.threadId);
-});
+// // Establishing the MySQL connection
+// conn.connect((error) => {
+//     if (error) {
+//         console.error('Error connecting to MySQL database: ' + error.stack);
+//         return;
+//     }
+//     console.log('Connected to MySQL database as id ' + conn.threadId);
+// });
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/register.html')
@@ -73,24 +73,45 @@ app.get('/student_delete', (req, res) => {
 	})
 });
 
-app.post('/student_update',(req,res) => {
+
+app.get('/update_student',(req,res) => {
 	conn.connect((error) => {
 		if(error) console.log(error);
 
-		const name = req.query.name;
-		const rollno = req.query.rollno;
-		const subject = req.query.subject;
-		const marks = req.query.marks;
-		const sql = "Update student set name = '"+name+"', rollno = '"+rollno+"', subject = '"+subject+"', marks = '"+marks+"' where id = ?";
+		const sql = "SELECT * FROM students where id = ?";
 
 		const id = req.query.id;
-		conn.query(sql,[id], (error,result) => {
+
+		conn.query(sql,[id],(error, result) => {
 			if(error) console.log(error);
 
-			res.redirect('/students') 
-
+			res.render(__dirname+"/update_student",{students:result})
 		})
 	})
+})
+
+app.post('/update_student', (req,res) => {
+	const name = req.body.name;
+	const rollno = req.body.rollno;
+	const subject = req.body.subject;
+	const marks = req.body.marks;
+	const id = req.body.id;
+
+
+	conn.connect((error) => {
+		if(error) console.log(error);
+
+		const sql = "UPDATE students SET name = ?, rollno = ?, subject = ?, marks = ? WHERE id = ?";
+
+    	conn.query(sql, [name, rollno, subject, marks, id], (error, result)=>{
+    		if(error) console.log(error);
+
+    		res.redirect('/students')
+
+    	})
+
+	})
+
 })
 
 app.listen(5000, () => {
