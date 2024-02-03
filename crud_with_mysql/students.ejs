@@ -33,6 +33,7 @@
             <td><%- students[i].subject %></td>
             <td><%- students[i].marks %></td>
             <td><button><a href="/student_delete?id=<%- students[i].id %>">Delete</a></button></td>
+            <td><button><a href="/student_update?id=<%- students[i].id %>">Update</a></button></td>
 
           </tr>
       <% } %>

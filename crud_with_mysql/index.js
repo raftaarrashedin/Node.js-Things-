@@ -73,6 +73,26 @@ app.get('/student_delete', (req, res) => {
 	})
 });
 
+app.post('/student_update',(req,res) => {
+	conn.connect((error) => {
+		if(error) console.log(error);
+
+		const name = req.query.name;
+		const rollno = req.query.rollno;
+		const subject = req.query.subject;
+		const marks = req.query.marks;
+		const sql = "Update student set name = '"+name+"', rollno = '"+rollno+"', subject = '"+subject+"', marks = '"+marks+"' where id = ?";
+
+		const id = req.query.id;
+		conn.query(sql,[id], (error,result) => {
+			if(error) console.log(error);
+
+			res.redirect('/students') 
+
+		})
+	})
+})
+
 app.listen(5000, () => {
     console.log('Server is running on port 5000');
 });
