@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Information List</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <h1>Student Information List</h1>
+
+  <table border="1" width="100%">
+    <tr>
+      <th>S.no.</th>
+      <th>Name</th>
+      <th>Roll No</th>
+      <th>Subject</th>
+      <th>Marks</th>
+      <th>Actions</th>
+
+    </tr>
+
+    <% if(students.length > 0) { %>
+
+      <% for(var i = 0; i< students.length;i++){ %>
+
+          <tr>
+            
+            <td><%- students[i].id %></td>
+            <td><%- students[i].name %></td>
+            <td><%- students[i].rollno %></td>
+            <td><%- students[i].subject %></td>
+            <td><%- students[i].marks %></td>
+            <td><button><a href="/student_delete?id=<%- students[i].id %>">Delete</a></button></td>
+
+          </tr>
+      <% } %>
+
+    <% } else { %>
+      <h1>Students data not found!</h1>
+    <% } %>
+
+
+
+
+  </table>
+
+
+
+  <!-- Bootstrap JS (Optional, if you need to use JS components) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
