@@ -27,3 +27,12 @@ fs.unlinkSync(`${dirPath}/toDeleteapple.txt`,(err) =>{
 	if(!err) console.log("File is Deleted")
 })
 
+fs.unlinkSync(`${dirPath}/toDeleteapple.txt`,(err) =>{
+	if(!err) console.log("File is Deleted")
+})
+fs.unlinkSync(`${dirPath}/toDeleteapple.txt`,(err) =>{
+	if(!err) console.log("File is Deleted")
+})
+fs.unlinkSync(`${dirPath}/toDeleteapple.txt`,(err) =>{
+	if(!err) console.log("File is Deleted")
+})
